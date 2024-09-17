@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const RefundPolicy: React.FC = () => {
   return (
@@ -8,9 +9,9 @@ const RefundPolicy: React.FC = () => {
         <title>Refund Policy | Your Website Name</title>
         <meta name="description" content="Refund policy for Your Website Name" />
       </Head>
-      <div className="min-h-screen bg-gradient-to-br from-purple-100 via-pink-100 to-yellow-100">
-        <main className="container mx-auto px-4 py-12 max-w-3xl">
-          <h1 className="text-5xl font-extrabold mb-8 text-center text-purple-800 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow container mx-auto px-4 py-12 max-w-3xl">
+          <h1 className="text-5xl font-extrabold mb-8 text-center text-black">
             Refund Policy
           </h1>
           
@@ -20,18 +21,18 @@ const RefundPolicy: React.FC = () => {
             </p>
 
             <section>
-              <h2 className="text-3xl font-bold mb-4 text-pink-700">1. Subscription Services</h2>
+              <h2 className="text-3xl font-bold mb-4 text-black">1. Subscription Services</h2>
               
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-2xl font-semibold mb-2 text-purple-600">1.1 Cancellation</h3>
+                  <h3 className="text-2xl font-semibold mb-2 text-black">1.1 Cancellation</h3>
                   <p className="text-gray-700 leading-relaxed">
                     You may cancel your subscription at any time. After cancellation, you will continue to have access to the service until the end of your current billing cycle, but no further charges will be applied.
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold mb-2 text-purple-600">1.2 Refunds</h3>
+                  <h3 className="text-2xl font-semibold mb-2 text-black">1.2 Refunds</h3>
                   <p className="text-gray-700 leading-relaxed">
                     Refunds for subscription services will only be provided if you contact us within 7 days of the initial purchase or renewal date.
                   </p>
@@ -40,9 +41,9 @@ const RefundPolicy: React.FC = () => {
             </section>
 
             <section>
-              <h2 className="text-3xl font-bold mb-4 text-pink-700">3. How to Request a Refund</h2>
+              <h2 className="text-3xl font-bold mb-4 text-black">3. How to Request a Refund</h2>
               <p className="text-gray-700 leading-relaxed mb-4">
-                To request a refund, please contact our support team at <a href="mailto:harish@bluelearn.in" className="text-blue-500 hover:underline">harish@bluelearn.in</a> with the following details:
+                To request a refund, please contact our support team at <a href="mailto:harish@bluelearn.in" className="text-gray-700 hover:underline">harish@bluelearn.in</a> with the following details:
               </p>
               <ul className="list-disc pl-6 text-gray-700 space-y-2">
                 <li>Your name</li>
@@ -56,23 +57,43 @@ const RefundPolicy: React.FC = () => {
             </section>
 
             <section>
-              <h2 className="text-3xl font-bold mb-4 text-pink-700">4. Refund Processing</h2>
+              <h2 className="text-3xl font-bold mb-4 text-black">4. Refund Processing</h2>
               <p className="text-gray-700 leading-relaxed">
                 If your refund request is approved, the refund will be processed through your original payment method within [X] business days. Please note that it may take additional time for your bank or credit card company to process and post the refund.
               </p>
             </section>
 
             <section>
-              <h2 className="text-3xl font-bold mb-4 text-pink-700">5. Contact Us</h2>
+              <h2 className="text-3xl font-bold mb-4 text-black">5. Contact Us</h2>
               <p className="text-gray-700 leading-relaxed">
                 If you have any questions about our Refund Policy, please contact us at:
               </p>
               <p className="text-gray-700 mt-2 font-semibold">
-                <strong>Email:</strong> <a href="mailto:harish@bluelearn.in" className="text-blue-500 hover:underline">harish@bluelearn.in</a>
+                <strong>Email:</strong> <a href="mailto:harish@bluelearn.in" className="text-gray-700 hover:underline">harish@bluelearn.in</a>
               </p>
             </section>
           </div>
         </main>
+        <footer className="bg-black text-white text-sm mt-auto">
+          <div className="container mx-auto px-4 py-6 flex flex-wrap justify-center items-center">
+            <span className="mr-2">&copy; {new Date().getFullYear()} Huloq Enterprices. All rights reserved.</span>
+            <div className="flex flex-wrap justify-center items-center">
+            <Link href="/" className="text-white hover:underline mx-2">Home</Link>
+              <span>|</span>
+                <Link href="/contact-us" className="text-white hover:underline mx-2">Contact Us</Link>
+                <span>|</span>
+                <Link href="/privacy-policy" className="text-white hover:underline mx-2">Privacy Policy</Link>
+                <span>|</span>
+                <Link href="/refund-policy" className="text-white hover:underline mx-2">Refund Policy</Link>
+                <span>|</span>
+                <Link href="/terms-and-conditions" className="text-white hover:underline mx-2">Terms and Conditions</Link>
+                <span>|</span>
+                <Link href="/pricing-policy" className="text-white hover:underline mx-2">Pricing Policy</Link>
+                <span>|</span>
+                <Link href="/cancellation-policy" className="text-white hover:underline mx-2">Cancellation Policy</Link>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
