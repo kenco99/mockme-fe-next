@@ -35,7 +35,8 @@ const ContactUs: React.FC = () => {
                 Our support team is available:
               </p>
               <p className="text-gray-700 font-semibold">
-                Mon to Friday, 12pm to 6pm
+                Mon to Friday, 12pm to 6pm <br></br>
+                Address: Hustlehub tech park, 27th main, HSR, Bangalore
               </p>
             </section>
           </div>
