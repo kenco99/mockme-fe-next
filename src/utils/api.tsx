@@ -54,6 +54,12 @@ export const getQuestion = async (params: QuestionParams): Promise<any> => {
         const response = await axiosInstance.get(url);
         return response.data;
     } catch (error) {
+        if (axios.isAxiosError(error)) {
+            const axiosError = error as AxiosError;
+            if (axiosError.response?.status === 403) {
+                throw { status: 403, data: axiosError.response.data };
+            }
+        }
         console.error('Error fetching question:', error);
         throw error;
     }
@@ -150,6 +156,16 @@ export const getSessions = async (): Promise<any> => {
         return response.data;
     } catch (error) {
         console.error('Error fetching sessions:', error);
+        throw error;
+    }
+};
+
+export const createOrder = async (): Promise<any> => {
+    try {
+        const response = await axiosInstance.post('/mockme/order');
+        return response.data;
+    } catch (error) {
+        console.error('Error creating order:', error);
         throw error;
     }
 };

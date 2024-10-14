@@ -6,6 +6,7 @@ import Question from "../components/Question";
 import Result from "../components/Result";
 import { getQuestion, submitAnswer } from "@/utils/api";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import PaymentModal from "../components/Rzp";
 
 interface QuestionData {
   id: string;
@@ -35,6 +36,7 @@ const QuizApp: React.FC = () => {
   const [sessionInfo, setSessionInfo] = useState<SessionInfo | null>(null);
   const [questionTime, setQuestionTime] = useState<number>(0);
   const [totalTime, setTotalTime] = useState<number | null>(null);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const searchParams = useSearchParams();
 
@@ -43,7 +45,7 @@ const QuizApp: React.FC = () => {
       try {
         setLoading(true);
         const response = await getQuestion(params);
-        console.log(response)
+        
         setQuestion(response.data);
         if (response.session_info) {
           setSessionInfo(response.session_info);
@@ -53,8 +55,12 @@ const QuizApp: React.FC = () => {
         setSelectedOption("");
         setResult(null);
         setQuestionTime(0);
-      } catch (error) {
-        setError("Failed to fetch question. Please try again.");
+      } catch (error: any) {
+        if (error.status === 403 && error.data?.msg === "You are not a paid user") {
+          setIsPaymentModalOpen(true);
+        } else {
+          setError("Failed to fetch question. Please try again.");
+        }
         setLoading(false);
       }
     },
@@ -225,6 +231,10 @@ const QuizApp: React.FC = () => {
           />
         )}
       </div>
+      <PaymentModal 
+        isOpen={isPaymentModalOpen} 
+        onClose={() => setIsPaymentModalOpen(false)}
+      />
     </div>
   );
 };
