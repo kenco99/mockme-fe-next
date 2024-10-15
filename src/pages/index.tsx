@@ -6,7 +6,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { signUp, fetchUserData } from "@/utils/api";
 import UserDetailsModal from "@/components/UserDetailsModal";
 import PaymentModal from '@/components/Rzp';
-import { PiMathOperations, PiArticleNyTimes, PiChartLineUp } from "react-icons/pi";
+import { PiMathOperations, PiArticleNyTimes, PiChartLineUp, PiPlayCircle } from "react-icons/pi";
 import Link from 'next/link';
 
 interface User {
@@ -112,6 +112,26 @@ const Index: React.FC = () => {
                <i> Questions from past GMAT exams, verified by GMAT experts, to help
                 you ace the exam. <br></br> Say bye to expensive GMAT books and prep material </i>
               </p>
+              
+              {/* New Video Section */}
+              <div className="mt-12 bg-white rounded-3xl shadow-bigcard p-8">
+                <h3 className="font-satoshi text-2xl text-gray-800 font-semibold mb-4">
+                  Watch How It Works
+                </h3>
+                <div className="relative pb-[56.25%] h-0">
+                  <iframe 
+                    className="absolute top-0 left-0 w-full h-full rounded-2xl"
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    title="Product Demo Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+                <p className="text-gray-600 mt-4 flex items-center justify-center">
+                  <PiPlayCircle className="mr-2 text-xl" />
+                  Learn how our platform can boost your GMAT score
+                </p>
+              </div>
             </div>
             <div className="bg-white flex flex-col gap-10 rounded-3xl shadow-bigcard py-12 px-8">
               <div className="flex items-center">
