@@ -78,13 +78,13 @@ const Index: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <button
                   onClick={openPaymentModal}
-                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-[#065F46] hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Pro membership
                 </button>
                 {user ? (
                   <button
-                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                    className="bg-[#1E40AF] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
                     onClick={handleDashboardClick}
                   >
                     Dashboard
