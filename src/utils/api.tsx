@@ -170,4 +170,14 @@ export const createOrder = async (): Promise<any> => {
     }
 };
 
+export const getSessionSummary = async (sessionId: string): Promise<any> => {
+  try {
+    const response = await axiosInstance.get(`/mockme/summary?session_id=${sessionId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching session summary:', error);
+    throw error;
+  }
+};
+
 export default axiosInstance;
