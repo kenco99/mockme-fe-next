@@ -45,7 +45,7 @@ const Index: React.FC = () => {
       if (!data?.firstname) {
         setShowModal(true);
       } else {
-        router.push("/dashboard");
+        router.push("/");
       }
     } catch (error) {
       console.error("Login error:", error);

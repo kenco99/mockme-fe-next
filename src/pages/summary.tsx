@@ -1,10 +1,11 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { getSessionSummary } from "@/utils/api";
 import moment from "moment";
+import Link from 'next/link';
+
 
 interface SummaryData {
   duration: number | null;
@@ -67,44 +68,67 @@ const Summary: React.FC = () => {
   if (!summary) return <div className="text-center mt-8 text-gray-600">No summary data available</div>;
 
   return (
-    <div className="flex justify-center min-h-screen bg-home-gradient p-8">
-      <div className="bg-white rounded-3xl flex flex-col gap-10 shadow-bigcard px-10 py-12 w-full max-w-xl">
-        <div className="text-center">
-          <h2 className="text-sm text-gray-500 mb-2">PRACTICE SESSION #{router.query.session_id}</h2>
-          <h1 className="text-xl font-bold mb-2">{summary.topics.join(" / ")}</h1>
-          <p className="text-sm text-gray-500">{moment(summary.createdAt).format("DD/MM/YYYY")}</p>
-        </div>
-
-        <div className="grid grid-cols-3 gap-4">
-          {summary.duration !== null && (
-            <div className="text-center">
-              <p className="text-sm text-gray-500 mb-1">Duration</p>
-              <p className="font-bold">{formatDuration(summary.duration)}</p>
+    <div className="flex flex-col min-h-screen bg-home-gradient">
+      {/* Navigation Bar */}
+      <nav className="bg-white shadow-md w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex-shrink-0 flex items-center">
+              <Link href="/">
+                <span className="text-xl font-bold text-gray-800">Practice GMAT</span>
+              </Link>
             </div>
-          )}
-          <div className="text-center">
-            <p className="text-sm text-gray-500 mb-1">Questions</p>
-            <p className="font-bold">{summary.total_answered}</p>
-          </div>
-          <div className="text-center">
-            <p className="text-sm text-gray-500 mb-1">Correct answers</p>
-            <p className="font-bold">{summary.correct_percent}%</p>
+            <div className="flex items-center">
+              <button
+                onClick={() => {/* Add your payment modal logic here */}}
+                className="bg-[#065F46] hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
+              >
+                Pro membership
+              </button>
+              <Link href="/dashboard">
+                <span className="bg-[#1E40AF] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
+                  Dashboard
+                </span>
+              </Link>
+            </div>
           </div>
         </div>
+      </nav>
 
-        <div className="flex gap-4">
-          {/* <button
-            onClick={handleRestart}
-            className="flex-1 bg-white text-black border border-gray-300 font-medium py-3 px-4 rounded-xl text-center hover:bg-gray-100 transition-colors"
-          >
-            Restart
-          </button> */}
-          <button
-            onClick={handleHome}
-            className="flex-1 bg-black text-white font-medium py-3 px-4 rounded-xl text-center hover:bg-gray-800 transition-colors"
-          >
-            Home
-          </button>
+      {/* Main Content */}
+      <div className="flex-grow flex items-center justify-center p-8">
+        <div className="bg-white rounded-3xl flex flex-col gap-10 shadow-bigcard px-10 py-12 w-full max-w-xl">
+          <div className="text-center">
+            <h2 className="text-sm text-gray-500 mb-2">PRACTICE SESSION #{router.query.session_id}</h2>
+            <h1 className="text-xl font-bold mb-2">{summary.topics.join(" / ")}</h1>
+            <p className="text-sm text-gray-500">{moment(summary.createdAt).format("DD/MM/YYYY")}</p>
+          </div>
+
+          <div className="grid grid-cols-3 gap-4">
+            {summary.duration !== null && (
+              <div className="text-center">
+                <p className="text-sm text-gray-500 mb-1">Duration</p>
+                <p className="font-bold">{formatDuration(summary.duration)}</p>
+              </div>
+            )}
+            <div className="text-center">
+              <p className="text-sm text-gray-500 mb-1">Questions</p>
+              <p className="font-bold">{summary.total_answered}</p>
+            </div>
+            <div className="text-center">
+              <p className="text-sm text-gray-500 mb-1">Correct answers</p>
+              <p className="font-bold">{summary.correct_percent}%</p>
+            </div>
+          </div>
+
+          <div className="flex gap-4">
+            <button
+              onClick={handleHome}
+              className="flex-1 bg-black text-white font-medium py-3 px-4 rounded-xl text-center hover:bg-gray-800 transition-colors"
+            >
+              Home
+            </button>
+          </div>
         </div>
       </div>
     </div>
