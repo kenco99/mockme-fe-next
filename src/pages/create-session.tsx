@@ -151,96 +151,93 @@ const CreateSession: React.FC = () => {
         <div className="min-h-screen bg-home-gradient py-6">
             <div className="flex flex-col gap-8 max-w-3xl mx-auto px-10 py-12 bg-white shadow-bigcard rounded-3xl">
                 <h1 className="text-3xl font-bold mb-2">Configure Your Practice</h1>
-                <div ref={sectionRef}>
+                
+                {/* Section Selector */}
+                <div ref={sectionRef} className="relative">
                     <label className="block mb-2 font-semibold">Section <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                        <div
-                            className={`w-full p-3 border ${sectionError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center`}
-                            onClick={() => setShowSectionDropdown(!showSectionDropdown)}
-                        >
+                    <div 
+                        className={`w-full p-3 border ${sectionError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center bg-white`}
+                        onClick={() => setShowSectionDropdown(!showSectionDropdown)}
+                    >
+                        <span className={selectedSections.length === 0 ? "text-gray-400" : "text-black"}>
                             {selectedSections.length > 0
-                                ? selectedSections
-                                    .map((s) => `${s.title} (${s.count})`)
-                                    .join(", ")
-                                : "Select"}
-                            <span>▼</span>
-                        </div>
-                        {sectionError && <p className="text-red-500 text-sm mt-1">{sectionError}</p>}
-                        {showSectionDropdown && (
-                            <div className="absolute top-full left-0 w-full max-h-60 overflow-y-auto bg-white border border-gray-300 rounded-b-md shadow-md z-10">
-                                <input
-                                    type="text"
-                                    placeholder="Search sections"
-                                    value={sectionSearchTerm}
-                                    onChange={(e) => {
-                                        setSectionSearchTerm(e.target.value);
-                                        fetchSections(e.target.value);
-                                    }}
-                                    className="w-full p-2 border-b border-gray-300"
-                                />
-                                {sections.map((section) => (
-                                    <div
-                                        key={section.section_id}
-                                        className={`p-2 cursor-pointer hover:bg-gray-100 ${
-                                            selectedSections.some(
-                                                (s) => s.section_id === section.section_id
-                                            )
-                                                ? "bg-gray-200"
-                                                : ""
-                                        }`}
-                                        onClick={() => handleSectionSelect(section)}
-                                    >
-                                        {section.title} ({section.count})
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                                ? selectedSections.map((s) => s.title).join(", ")
+                                : "Select sections"}
+                        </span>
+                        <svg className={`w-5 h-5 text-gray-400 transition-transform ${showSectionDropdown ? 'transform rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
                     </div>
+                    {sectionError && <p className="text-red-500 text-sm mt-1">{sectionError}</p>}
+                    {showSectionDropdown && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                            {sections.map((section) => (
+                                <div
+                                    key={section.section_id}
+                                    className={`p-2 cursor-pointer hover:bg-gray-100 flex items-center ${
+                                        selectedSections.some((s) => s.section_id === section.section_id)
+                                            ? "bg-blue-100"
+                                            : ""
+                                    }`}
+                                    onClick={() => handleSectionSelect(section)}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedSections.some((s) => s.section_id === section.section_id)}
+                                        onChange={() => {}}
+                                        className="mr-2"
+                                    />
+                                    <span>{section.title}</span>
+                                    <span className="ml-auto text-gray-400">({section.count})</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
-                <div ref={topicRef}>
+
+                {/* Topic Selector */}
+                <div ref={topicRef} className="relative">
                     <label className="block mb-2 font-semibold">Topic <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                        <div
-                            className={`w-full p-3 border ${topicError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center`}
-                            onClick={() => setShowTopicDropdown(!showTopicDropdown)}
-                        >
+                    <div 
+                        className={`w-full p-3 border ${topicError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center bg-white`}
+                        onClick={() => setShowTopicDropdown(!showTopicDropdown)}
+                    >
+                        <span className={selectedTopics.length === 0 ? "text-gray-400" : "text-black"}>
                             {selectedTopics.length > 0
-                                ? selectedTopics
-                                    .map((t) => `${t.title} (${t.count})`)
-                                    .join(", ")
-                                : "Select"}
-                            <span>▼</span>
-                        </div>
-                        {topicError && <p className="text-red-500 text-sm mt-1">{topicError}</p>}
-                        {showTopicDropdown && (
-                            <div className="absolute top-full left-0 w-full max-h-60 overflow-y-auto bg-white border border-gray-300 rounded-b-md shadow-md z-10">
-                                <input
-                                    type="text"
-                                    placeholder="Search topics"
-                                    value={topicSearchTerm}
-                                    onChange={(e) => {
-                                        setTopicSearchTerm(e.target.value);
-                                        fetchTopics(e.target.value);
-                                    }}
-                                    className="w-full p-2 border-b border-gray-300"
-                                />
-                                {topics.map((topic) => (
-                                    <div
-                                        key={topic.topic_id}
-                                        className={`p-2 cursor-pointer hover:bg-gray-100 ${
-                                            selectedTopics.some((t) => t.topic_id === topic.topic_id)
-                                                ? "bg-gray-200"
-                                                : ""
-                                        }`}
-                                        onClick={() => handleTopicSelect(topic)}
-                                    >
-                                        {topic.title} ({topic.count})
-                                    </div>
-                                ))}
-                            </div>
-                        )}
+                                ? selectedTopics.map((t) => t.title).join(", ")
+                                : "Select topics"}
+                        </span>
+                        <svg className={`w-5 h-5 text-gray-400 transition-transform ${showTopicDropdown ? 'transform rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
                     </div>
+                    {topicError && <p className="text-red-500 text-sm mt-1">{topicError}</p>}
+                    {showTopicDropdown && (
+                        <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                            {topics.map((topic) => (
+                                <div
+                                    key={topic.topic_id}
+                                    className={`p-2 cursor-pointer hover:bg-gray-100 flex items-center ${
+                                        selectedTopics.some((t) => t.topic_id === topic.topic_id)
+                                            ? "bg-blue-100"
+                                            : ""
+                                    }`}
+                                    onClick={() => handleTopicSelect(topic)}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedTopics.some((t) => t.topic_id === topic.topic_id)}
+                                        onChange={() => {}}
+                                        className="mr-2"
+                                    />
+                                    <span>{topic.title}</span>
+                                    <span className="ml-auto text-gray-400">({topic.count})</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
+
                 <div>
                     <label className="block mb-2 font-semibold">
                         Number of questions
