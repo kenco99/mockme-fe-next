@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 import { signUp, fetchUserData } from "@/utils/api";
 import UserDetailsModal from "@/components/UserDetailsModal";
 import PaymentModal from '@/components/Rzp';
@@ -45,7 +45,7 @@ const Index: React.FC = () => {
       if (!data?.firstname) {
         setShowModal(true);
       } else {
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -67,6 +67,13 @@ const Index: React.FC = () => {
   const openPaymentModal = () => setIsPaymentModalOpen(true);
   const closePaymentModal = () => setIsPaymentModalOpen(false);
 
+  const handleLogout = () => {
+    googleLogout();
+    localStorage.removeItem("jwt_token");
+    setUser(null);
+    router.push("/");
+  };
+
   return (
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
       <div className="flex flex-col min-h-screen">
@@ -83,12 +90,20 @@ const Index: React.FC = () => {
                   Pro membership
                 </button>
                 {user ? (
-                  <button
-                    className="bg-[#1E40AF] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
-                    onClick={handleDashboardClick}
-                  >
-                    Dashboard
-                  </button>
+                  <div className="flex items-center space-x-4">
+                    <button
+                      className="bg-[#1E40AF] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors"
+                      onClick={handleDashboardClick}
+                    >
+                      Dashboard
+                    </button>
+                    <button
+                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </div>
                 ) : (
                   <GoogleLogin
                     onSuccess={handleCredentialResponse}
