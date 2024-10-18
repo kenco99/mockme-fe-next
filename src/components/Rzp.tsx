@@ -101,7 +101,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose }) => {
             <span className="text-3xl sm:text-4xl font-bold">₹ 999</span>
             <span className="mt-1 sm:mt-0 sm:ml-2 text-gray-600">lifetime access</span>
           </div>
-          <div className="mb-6">
+          <div className="mb-[24px]">
             <h3 className="text-sm uppercase text-gray-500 mb-2">WHAT'S INCLUDED</h3>
             <ul className="space-y-2">
               <li className="flex items-center">

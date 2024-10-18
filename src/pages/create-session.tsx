@@ -38,6 +38,8 @@ const CreateSession: React.FC = () => {
     const router = useRouter();
     const sectionRef = useRef<HTMLDivElement>(null);
     const topicRef = useRef<HTMLDivElement>(null);
+    const [sectionError, setSectionError] = useState<string>("");
+    const [topicError, setTopicError] = useState<string>("");
 
     useEffect(() => {
         fetchSections();
@@ -106,9 +108,28 @@ const CreateSession: React.FC = () => {
         } else {
             setSelectedTopics([...selectedTopics, topic]);
         }
+        setTopicError(""); // Clear the error when a topic is selected
     };
 
     const handleStart = async () => {
+        let hasError = false;
+
+        if (selectedSections.length === 0) {
+            setSectionError("Please select at least one section");
+            hasError = true;
+        } else {
+            setSectionError("");
+        }
+
+        if (selectedTopics.length === 0) {
+            setTopicError("Please select at least one topic");
+            hasError = true;
+        } else {
+            setTopicError("");
+        }
+
+        if (hasError) return;
+
         try {
             const sessionData = {
                 topic_ids: selectedTopics.map((topic) => topic.topic_id),
@@ -131,10 +152,10 @@ const CreateSession: React.FC = () => {
             <div className="flex flex-col gap-8 max-w-3xl mx-auto px-10 py-12 bg-white shadow-bigcard rounded-3xl">
                 <h1 className="text-3xl font-bold mb-2">Configure Your Practice</h1>
                 <div ref={sectionRef}>
-                    <label className="block mb-2 font-semibold">Section</label>
+                    <label className="block mb-2 font-semibold">Section <span className="text-red-500">*</span></label>
                     <div className="relative">
                         <div
-                            className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex justify-between items-center"
+                            className={`w-full p-3 border ${sectionError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center`}
                             onClick={() => setShowSectionDropdown(!showSectionDropdown)}
                         >
                             {selectedSections.length > 0
@@ -144,6 +165,7 @@ const CreateSession: React.FC = () => {
                                 : "Select"}
                             <span>▼</span>
                         </div>
+                        {sectionError && <p className="text-red-500 text-sm mt-1">{sectionError}</p>}
                         {showSectionDropdown && (
                             <div className="absolute top-full left-0 w-full max-h-60 overflow-y-auto bg-white border border-gray-300 rounded-b-md shadow-md z-10">
                                 <input
@@ -176,10 +198,10 @@ const CreateSession: React.FC = () => {
                     </div>
                 </div>
                 <div ref={topicRef}>
-                    <label className="block mb-2 font-semibold">Topic</label>
+                    <label className="block mb-2 font-semibold">Topic <span className="text-red-500">*</span></label>
                     <div className="relative">
                         <div
-                            className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex justify-between items-center"
+                            className={`w-full p-3 border ${topicError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center`}
                             onClick={() => setShowTopicDropdown(!showTopicDropdown)}
                         >
                             {selectedTopics.length > 0
@@ -189,6 +211,7 @@ const CreateSession: React.FC = () => {
                                 : "Select"}
                             <span>▼</span>
                         </div>
+                        {topicError && <p className="text-red-500 text-sm mt-1">{topicError}</p>}
                         {showTopicDropdown && (
                             <div className="absolute top-full left-0 w-full max-h-60 overflow-y-auto bg-white border border-gray-300 rounded-b-md shadow-md z-10">
                                 <input
