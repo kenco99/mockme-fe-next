@@ -146,6 +146,23 @@ const QuizApp: React.FC = () => {
       .padStart(2, "0")}`;
   };
 
+  const renderMathJaxWithTags = (text: string) => {
+    const segments = text.split(/(<br>|<b>.*?<\/b>)/i);
+    return segments.map((segment, index) => {
+      if (segment.toLowerCase().startsWith('<br>')) {
+        return <br key={index} />;
+      } else if (segment.toLowerCase().startsWith('<b>')) {
+        return (
+          <b key={index}>
+            <MathJax>{segment.slice(3, -4)}</MathJax>
+          </b>
+        );
+      } else {
+        return <MathJax key={index}>{segment}</MathJax>;
+      }
+    });
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -219,9 +236,8 @@ const QuizApp: React.FC = () => {
                     disabled={result !== null}
                     className="mr-4"
                   />
-                  {/*<span dangerouslySetInnerHTML={{__html: option.option}}></span>*/}
                   <MathJaxContext>
-                    <MathJax>{option.option}</MathJax>
+                    {renderMathJaxWithTags(option.option)}
                   </MathJaxContext>
                 </label>
               );
