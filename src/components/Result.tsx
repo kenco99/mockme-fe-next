@@ -18,14 +18,21 @@ const Result: React.FC<ResultProps> = ({
 }) => {
   if (!result) return null;
 
-  const renderMathJaxWithLineBreaks = (text:string) => {
-    const segments = text.split(/<br>/i);
-    return segments.map((segment, index) => (
-        <React.Fragment key={index}>
-          <MathJaxContext><MathJax>{segment}</MathJax></MathJaxContext>
-          {index < segments.length - 1 && <br />}
-        </React.Fragment>
-    ));
+  const renderMathJaxWithTags = (text: string) => {
+    const segments = text.split(/(<br>|<b>.*?<\/b>)/i);
+    return segments.map((segment, index) => {
+      if (segment.toLowerCase().startsWith('<br>')) {
+        return <br key={index} />;
+      } else if (segment.toLowerCase().startsWith('<b>')) {
+        return (
+          <b key={index}>
+            <MathJaxContext><MathJax>{segment.slice(3, -4)}</MathJax></MathJaxContext>
+          </b>
+        );
+      } else {
+        return <MathJaxContext key={index}><MathJax>{segment}</MathJax></MathJaxContext>;
+      }
+    });
   };
 
   return (
@@ -36,7 +43,7 @@ const Result: React.FC<ResultProps> = ({
       <div>
         <h3 className="text-lg font-bold text-gray-900 mb-4">Solution</h3>
         <div className="solution-text text-base leading-relaxed mb-4">
-          {renderMathJaxWithLineBreaks(result.solution_text)}
+          {renderMathJaxWithTags(result.solution_text)}
         </div>
         <button
           onClick={onNextQuestion}

@@ -6,6 +6,8 @@ import Question from "../components/Question";
 import Result from "../components/Result";
 import { getQuestion, submitAnswer } from "@/utils/api";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import PaymentModal from "../components/Rzp";
+import { useRouter } from 'next/router';
 
 interface QuestionData {
   id: string;
@@ -35,6 +37,8 @@ const QuizApp: React.FC = () => {
   const [sessionInfo, setSessionInfo] = useState<SessionInfo | null>(null);
   const [questionTime, setQuestionTime] = useState<number>(0);
   const [totalTime, setTotalTime] = useState<number | null>(null);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
+  const router = useRouter();
 
   const searchParams = useSearchParams();
 
@@ -43,7 +47,19 @@ const QuizApp: React.FC = () => {
       try {
         setLoading(true);
         const response = await getQuestion(params);
-        console.log(response)
+        
+        if (response.code === 201) {
+          // Session completed, redirect to summary page
+          const sessionId = params.sessionId || searchParams.get("session_id");
+          if (sessionId) {
+            router.push(`/summary?session_id=${sessionId}`);
+          } else {
+            console.error("Session ID not found for redirection");
+            setError("Unable to load summary. Please try again.");
+          }
+          return;
+        }
+        
         setQuestion(response.data);
         if (response.session_info) {
           setSessionInfo(response.session_info);
@@ -53,12 +69,16 @@ const QuizApp: React.FC = () => {
         setSelectedOption("");
         setResult(null);
         setQuestionTime(0);
-      } catch (error) {
-        setError("Failed to fetch question. Please try again.");
+      } catch (error: any) {
+        if (error.code === 403 && error.data?.msg === "You are not a paid user") {
+          setIsPaymentModalOpen(true);
+        } else {
+          setError("Failed to fetch question. Please try again.");
+        }
         setLoading(false);
       }
     },
-    []
+    [router, searchParams]
   );
 
   useEffect(() => {
@@ -126,6 +146,23 @@ const QuizApp: React.FC = () => {
       .padStart(2, "0")}`;
   };
 
+  const renderMathJaxWithTags = (text: string) => {
+    const segments = text.split(/(<br>|<b>.*?<\/b>)/i);
+    return segments.map((segment, index) => {
+      if (segment.toLowerCase().startsWith('<br>')) {
+        return <br key={index} />;
+      } else if (segment.toLowerCase().startsWith('<b>')) {
+        return (
+          <b key={index}>
+            <MathJax>{segment.slice(3, -4)}</MathJax>
+          </b>
+        );
+      } else {
+        return <MathJax key={index}>{segment}</MathJax>;
+      }
+    });
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
@@ -137,9 +174,9 @@ const QuizApp: React.FC = () => {
         </h1>
         {sessionInfo && (
           <div className="flex flex-row gap-8 items-center">
-            <button className="bg-gray-100 text-gray-800 rounded-lg px-4 py-2 text-sm hover:bg-gray-300 transition-colors">
+            {/* <button className="bg-gray-100 text-gray-800 rounded-lg px-4 py-2 text-sm hover:bg-gray-300 transition-colors">
               Pause session II
-            </button>
+            </button> */}
             <span>This question: {formatTime(questionTime)}</span>
             {totalTime !== null && <span>Total: {formatTime(totalTime)}</span>}
           </div>
@@ -199,9 +236,8 @@ const QuizApp: React.FC = () => {
                     disabled={result !== null}
                     className="mr-4"
                   />
-                  {/*<span dangerouslySetInnerHTML={{__html: option.option}}></span>*/}
                   <MathJaxContext>
-                    <MathJax>{option.option}</MathJax>
+                    {renderMathJaxWithTags(option.option)}
                   </MathJaxContext>
                 </label>
               );
@@ -225,6 +261,10 @@ const QuizApp: React.FC = () => {
           />
         )}
       </div>
+      <PaymentModal 
+        isOpen={isPaymentModalOpen} 
+        onClose={() => setIsPaymentModalOpen(false)}
+      />
     </div>
   );
 };
