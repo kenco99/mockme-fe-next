@@ -79,12 +79,6 @@ const Summary: React.FC = () => {
               </Link>
             </div>
             <div className="flex items-center">
-              <button
-                onClick={() => {/* Add your payment modal logic here */}}
-                className="bg-[#065F46] hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4"
-              >
-                Pro membership
-              </button>
               <Link href="/dashboard">
                 <span className="bg-[#1E40AF] text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors">
                   Dashboard

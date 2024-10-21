@@ -83,12 +83,12 @@ const Index: React.FC = () => {
             <div className="w-full mx-auto px-8 py-4 flex justify-between items-center">
               <h1 className="text-lg font-bold">Practice GMAT</h1>
               <div className="flex items-center space-x-4">
-                <button
+                {/* <button
                   onClick={openPaymentModal}
                   className="bg-[#065F46] hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Pro membership
-                </button>
+                </button> */}
                 {user ? (
                   <div className="flex items-center space-x-4">
                     <button

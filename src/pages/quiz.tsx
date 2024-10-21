@@ -70,7 +70,7 @@ const QuizApp: React.FC = () => {
         setResult(null);
         setQuestionTime(0);
       } catch (error: any) {
-        if (error.code === 403 && error.data?.msg === "You are not a paid user") {
+        if (error.status === 403) {
           setIsPaymentModalOpen(true);
         } else {
           setError("Failed to fetch question. Please try again.");
