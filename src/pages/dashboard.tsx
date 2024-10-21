@@ -6,6 +6,7 @@ import moment from "moment";
 import { getSessions } from "@/utils/api";
 import Link from 'next/link';
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import PaymentModal from '@/components/Rzp';
 
 interface Session {
     session_id: number;
@@ -23,6 +24,7 @@ const Dashboard: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const router = useRouter();
+    const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
     useEffect(() => {
         fetchSessions();
@@ -72,6 +74,9 @@ const Dashboard: React.FC = () => {
         return `${((correct / attempted) * 100).toFixed(2)}%`;
     };
 
+    const openPaymentModal = () => setIsPaymentModalOpen(true);
+    const closePaymentModal = () => setIsPaymentModalOpen(false);
+
     if (loading)
         return <div className="text-center mt-8 text-gray-600">Loading...</div>;
     if (error)
@@ -88,6 +93,12 @@ const Dashboard: React.FC = () => {
                                 <h1 className="text-lg font-bold cursor-pointer">Practice GMAT</h1>
                             </Link>
                             <div className="flex items-center space-x-4">
+                                <button
+                                    onClick={openPaymentModal}
+                                    className="bg-[#065F46] hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                >
+                                    Pro membership
+                                </button>
                                 {/* You can add additional navigation items here if needed */}
                             </div>
                         </div>
@@ -182,7 +193,7 @@ const Dashboard: React.FC = () => {
                     </main>
                 </div>
                 
-                {/* You can add the footer here if needed */}
+                <PaymentModal isOpen={isPaymentModalOpen} onClose={closePaymentModal} />
             </div>
         </GoogleOAuthProvider>
     );

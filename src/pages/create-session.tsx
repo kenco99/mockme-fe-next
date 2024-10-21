@@ -121,18 +121,18 @@ const CreateSession: React.FC = () => {
             setSectionError("");
         }
 
-        if (selectedTopics.length === 0) {
-            setTopicError("Please select at least one topic");
-            hasError = true;
-        } else {
-            setTopicError("");
-        }
+        // if (selectedTopics.length === 0) {
+        //     setTopicError("Please select at least one topic");
+        //     hasError = true;
+        // } else {
+        //     setTopicError("");
+        // }
 
         if (hasError) return;
 
         try {
             const sessionData = {
-                topic_ids: selectedTopics.map((topic) => topic.topic_id),
+                topic_ids: null, //selectedTopics.map((topic) => topic.topic_id),
                 section_ids: selectedSections.map((section) => section.section_id),
                 number_of_questions:
                     questionOption === "manual" ? manualQuestionCount : null,
@@ -196,7 +196,7 @@ const CreateSession: React.FC = () => {
                 </div>
 
                 {/* Topic Selector */}
-                <div ref={topicRef} className="relative">
+                {/* <div ref={topicRef} className="relative">
                     <label className="block mb-2 font-semibold">Topic <span className="text-red-500">*</span></label>
                     <div 
                         className={`w-full p-3 border ${topicError ? 'border-red-500' : 'border-gray-300'} rounded-md cursor-pointer flex justify-between items-center bg-white`}
@@ -236,7 +236,7 @@ const CreateSession: React.FC = () => {
                             ))}
                         </div>
                     )}
-                </div>
+                </div> */}
 
                 <div>
                     <label className="block mb-2 font-semibold">
