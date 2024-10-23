@@ -78,7 +78,7 @@ const Index: React.FC = () => {
     <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
       <div className="flex flex-col min-h-screen">
         <div className="flex-grow">
-          <div className="absolute left-1/2 -translate-x-1/2 -translate-y-6 bg-home-gradient rounded-b-[24px] h-[90%] w-[95%] z-0"></div>
+          <div className="absolute left-1/2 -translate-x-1/2 -translate-y-6 bg-home-gradient rounded-b-[24px] h-[100%] w-[95%] z-0"></div>
           <div className="bg-white mx-auto rounded-xl max-w-5xl shadow-bigcard relative z-10">
             <div className="w-full mx-auto px-8 py-4 flex justify-between items-center">
               <h1 className="text-lg font-bold">Practice GMAT</h1>
@@ -123,7 +123,7 @@ const Index: React.FC = () => {
               <h3 className="font-satoshi text-[52px] text-gray-800 font-semibold">
                 For GMAT Focus Edition
               </h3>
-              <p className="text-gray-400 leading-relaxed mt-6 max-w-2xl mx-auto">
+              <p className="text-gray-400 leading-relaxed mt-6 max-w-xl mx-auto">
                <i> Questions from past GMAT exams, verified by GMAT experts, to help
                 you ace the exam. <br></br> Say bye to expensive GMAT books and prep material </i>
               </p>
