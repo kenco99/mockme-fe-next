@@ -137,7 +137,7 @@ interface SessionData {
 
 export const createSession = async (sessionData: {
     duration_seconds: number | null;
-    topic_ids: number[];
+    topic_ids: number[] | null;
     section_ids: number[];
     number_of_questions: number | null
 }): Promise<any> => {
