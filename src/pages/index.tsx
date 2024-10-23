@@ -81,7 +81,7 @@ const Index: React.FC = () => {
           <div className="absolute left-1/2 -translate-x-1/2 -translate-y-6 bg-home-gradient rounded-b-[24px] h-[120%] w-[100%] z-0"></div>
           <div className="bg-white mx-auto rounded-xl max-w-5xl shadow-bigcard relative z-10">
             <div className="w-full mx-auto px-8 py-4 flex justify-between items-center">
-              <h1 className="text-lg font-bold">Practice GMAT</h1>
+              <h1 className="text-sm font-bold sm:text-2xl">Practice GMAT</h1>
               <div className="flex items-center space-x-4">
                 {/* <button
                   onClick={openPaymentModal}
@@ -123,18 +123,10 @@ const Index: React.FC = () => {
               <h3 className="font-satoshi text-[52px] text-gray-800 font-semibold">
                 For GMAT Focus Edition
               </h3>
-              <p className="text-gray-400 leading-relaxed mt-6 max-w-xl mx-auto text-pretty ">
-               <i> Questions from past GMAT exams to help
-                you ace the exam. </i>
-
-                <br></br>
-
-                <i> Say bye to expensive GMAT books and prep material </i>
-                
-                 
-          
-               
-                 
+              <p className="text-gray-400 leading-relaxed mt-6 max-w-xl mx-[15px] sm:mx-auto text-pretty">
+                <i>Questions from past GMAT exams to help you ace the exam.</i>
+                <br />
+                <i>Say bye to expensive GMAT books and prep material</i>
               </p>
 
               {/* New Video Section */}
