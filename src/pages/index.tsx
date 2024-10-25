@@ -137,7 +137,7 @@ const Index: React.FC = () => {
                 <div className="relative pb-[56.25%] h-0">
                   <iframe 
                     className="absolute top-0 left-0 w-full h-full rounded-2xl"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                    src="https://www.youtube.com/embed/oRpG9VYVDQI?rel=0"
                     title="Product Demo Video"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
