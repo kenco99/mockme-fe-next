@@ -156,7 +156,7 @@ const Index: React.FC = () => {
                 </div>
                 <div className="flex-grow">
                   <h4 className="font-inter text-lg font-medium mb-1">
-                    Math practice
+                    Quant practice
                   </h4>
                 </div>
                 <button
