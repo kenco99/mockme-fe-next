@@ -16,7 +16,7 @@ const PricingPolicy: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">1. Pricing Structure</h2>
             <p className="mb-4">
-              We offer a freemium pricing structure. The first 5 questions are free to access and then we charge a monthly subscription of ₹1,000 to access the rest of the questions.
+              We offer a freemium pricing structure. The first 5 questions are free to access and then we charge a one-time payment of ₹1,000 to access the rest of the questions.
             </p>
           </section>
 
@@ -30,11 +30,11 @@ const PricingPolicy: React.FC = () => {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold mb-4">3. Subscription Plans</h2>
+            <h2 className="text-2xl font-semibold mb-4">3. Paid Plans</h2>
             <ul className="list-disc pl-6">
-              <li><strong>Billing Cycle:</strong> Subscriptions are billed on a monthly basis.</li>
-              <li><strong>Auto-Renewal:</strong> Subscriptions renew automatically at the end of each billing cycle. You can cancel at any time before the renewal date to avoid further charges.</li>
-              <li><strong>Cancellation:</strong> You can cancel the subscription by clicking on the cancel subscribe button under profile icon</li>
+              <li><strong>Billing Cycle:</strong> One-time payment.</li>
+               
+              
             </ul>
           </section>
 
@@ -46,15 +46,15 @@ const PricingPolicy: React.FC = () => {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">5. Refund Policy</h2>
             <ul className="list-disc pl-6">
-              <li><strong>Digital Products:</strong> Due to the nature of digital products, all sales are final. However, if you encounter any issues, please contact us within 7 days of purchase for assistance. You can email us at harish@bluelearn.in</li>
-              <li><strong>Subscriptions:</strong> If you are unsatisfied with your subscription, you can cancel it at any time, but refunds will only be provided if you contact us within 7 days of the initial purchase.</li>
+              <li><strong>Digital Products:</strong> Due to the nature of digital products, all sales are final. However, if you encounter any issues, please contact us within 2 days of purchase for assistance. You can email us at harish@bluelearn.in</li>
+
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">7. Price Changes</h2>
             <p>
-              We reserve the right to change our prices at any time. Any changes will be communicated to existing subscribers at least 7 days in advance. Your continued use of the service after the price change indicates your acceptance of the new prices.
+              We reserve the right to change our prices at any time.  
             </p>
           </section>
 

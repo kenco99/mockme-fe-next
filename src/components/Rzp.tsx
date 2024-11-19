@@ -33,7 +33,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose }) => {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID!,
         amount: orderData.data.amount,
         currency: orderData.data.currency,
-        name: "MockMe",
+        name: "PracticeGMAT",
         description: "Pro Membership",
         image: "https://example.com/your_logo",
         order_id: orderData.data.id,
