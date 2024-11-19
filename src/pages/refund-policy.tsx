@@ -21,20 +21,20 @@ const RefundPolicy: React.FC = () => {
             </p>
 
             <section>
-              <h2 className="text-3xl font-bold mb-4 text-black">1. Subscription Services</h2>
+              <h2 className="text-3xl font-bold mb-4 text-black">1. Pro Services</h2>
               
               <div className="space-y-4">
                 <div>
                   <h3 className="text-2xl font-semibold mb-2 text-black">1.1 Cancellation</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    You may cancel your subscription at any time. After cancellation, you will continue to have access to the service until the end of your current billing cycle, but no further charges will be applied.
+                    If you are unhapppy with the service, please contact us at harish@bluelearn.in within 2 days of the purchase date.
                   </p>
                 </div>
 
                 <div>
                   <h3 className="text-2xl font-semibold mb-2 text-black">1.2 Refunds</h3>
                   <p className="text-gray-700 leading-relaxed">
-                    Refunds for subscription services will only be provided if you contact us within 7 days of the initial purchase or renewal date.
+                    Refunds for pro services will only be provided if you contact us within 2 days of the initial purchase or renewal date.
                   </p>
                 </div>
               </div>
@@ -59,7 +59,7 @@ const RefundPolicy: React.FC = () => {
             <section>
               <h2 className="text-3xl font-bold mb-4 text-black">4. Refund Processing</h2>
               <p className="text-gray-700 leading-relaxed">
-                If your refund request is approved, the refund will be processed through your original payment method within [X] business days. Please note that it may take additional time for your bank or credit card company to process and post the refund.
+                If your refund request is approved, the refund will be processed through your original payment method within 30 business days. Please note that it may take additional time for your bank or credit card company to process and post the refund.
               </p>
             </section>
 
