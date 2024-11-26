@@ -186,7 +186,7 @@ const QuizApp: React.FC = () => {
         {sessionInfo && (
           <div className="flex justify-between text-lg font-semibold mb-4">
             <span>
-              Question {sessionInfo.attempted_count}/
+              Question {sessionInfo.attempted_count + 1}/
               {sessionInfo.question_count}
             </span>
           </div>
