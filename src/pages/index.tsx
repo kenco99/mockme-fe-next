@@ -118,7 +118,7 @@ const Index: React.FC = () => {
           <main className="max-w-5xl mx-auto relative z-10 flex-grow">
             <div className="text-center my-20">
               <h2 className="font-playfair text-[52px] text-gray-500 italic mb-2 ">
-                1000+ practice questions
+                500+ practice questions
               </h2>
               <h3 className="font-satoshi text-[52px] text-gray-800 font-semibold">
                 For GMAT Focus Edition
