@@ -85,16 +85,8 @@ const CreateSession: React.FC = () => {
     };
 
     const handleSectionSelect = (section: Section) => {
-        const isSelected = selectedSections.some(
-            (s) => s.section_id === section.section_id
-        );
-        if (isSelected) {
-            setSelectedSections(
-                selectedSections.filter((s) => s.section_id !== section.section_id)
-            );
-        } else {
-            setSelectedSections([...selectedSections, section]);
-        }
+        setSelectedSections([section]);
+        setSectionError("");
     };
 
     const handleTopicSelect = (topic: Topic) => {
@@ -182,13 +174,12 @@ const CreateSession: React.FC = () => {
                                     onClick={() => handleSectionSelect(section)}
                                 >
                                     <input
-                                        type="checkbox"
+                                        type="radio"
                                         checked={selectedSections.some((s) => s.section_id === section.section_id)}
                                         onChange={() => {}}
                                         className="mr-2"
                                     />
                                     <span>{section.title}</span>
-                                    <span className="ml-auto text-gray-400">({section.count})</span>
                                 </div>
                             ))}
                         </div>
